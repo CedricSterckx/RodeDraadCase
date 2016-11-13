@@ -1,0 +1,5 @@
+C:\Users\jonasa\Source\Repos\Opdracht PXL\Opdracht PXL\Media.Utils\bin\Debug\Media.Utils.dll
+C:\Users\jonasa\Source\Repos\Opdracht PXL\Opdracht PXL\Media.Utils\bin\Debug\Media.Utils.pdb
+C:\Users\jonasa\Source\Repos\Opdracht PXL\Opdracht PXL\Media.Utils\obj\Debug\Media.Utils.csprojResolveAssemblyReference.cache
+C:\Users\jonasa\Source\Repos\Opdracht PXL\Opdracht PXL\Media.Utils\obj\Debug\Media.Utils.dll
+C:\Users\jonasa\Source\Repos\Opdracht PXL\Opdracht PXL\Media.Utils\obj\Debug\Media.Utils.pdb
