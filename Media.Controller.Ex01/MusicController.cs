@@ -152,7 +152,7 @@ namespace Media.Controller.Ex01
         /// <param name="oldSong">A song from the playlist that you want to remove.</param>
         public void RemoveSongFromPlaylist(Song oldSong)
         {
-            _playlist.RemoveMedia(oldSong);
+            _playlist.RemoveMedia(oldSong); 
         }
 
         /// <summary>

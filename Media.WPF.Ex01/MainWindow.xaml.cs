@@ -32,10 +32,7 @@ namespace Media.WPF.Ex01
         private MovieController movieController;
         private MusicController musicController;
 
-        private Song currentSong;
-
-        private MainWindow window;
-
+        private MediaController activeController;
 
 
         public MainWindow()
@@ -48,13 +45,26 @@ namespace Media.WPF.Ex01
             movieController = new MovieController();
             musicController = new MusicController(audioPlayer, audioPlaylist);
 
-            currentSong = new Song();
+            musicListBox.ItemsSource = musicController.List;
+            movieListBox.ItemsSource = movieController.List;
 
-            musicController.Player.IsStarted += audioPlaylist.AddMedia(currentSong); //opdracht waar we code al an krijgen
-            musicController.Player.IsFinished += audioPlaylist.RemoveMedia(currentSong);
 
-            window = new MainWindow(); //om dispose method in te steken bij close event
+            musicController.Player.IsStarted += Player_IsStarted;
+            musicController.Player.IsFinished += Player_IsFinished;
 
+
+
+
+        }
+
+        private void Player_IsFinished()
+        {
+            //Doen wss bij databinding
+        }
+
+        private void Player_IsStarted()
+        {
+            //Doen wss bij databinding
         }
 
         private void btnPlayMusic_Click(object sender, RoutedEventArgs e)
@@ -70,6 +80,54 @@ namespace Media.WPF.Ex01
         private void btnStopMusic_Click(object sender, RoutedEventArgs e)
         {
             musicController.StopPlaying();
+        }
+
+
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            musicController.Dispose();
+            movieController.Dispose();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (musicTabItem.IsSelected)
+            {
+                activeController = musicController;
+                musicListBox.Items.Refresh();
+                musicListBox.ItemsSource = activeController.List;
+                //waarom wordt activeController geen musicController
+                if (activeController.HasSongsInPlaylist)
+                {
+                    btnPlayMusic.IsEnabled = false;
+                    btnStopMusic.IsEnabled = false;
+                    btnNextMusic.IsEnabled = false;
+                    btnPauseMusic.IsEnabled = false;        
+                } else
+                {
+                    btnPlayMusic.IsEnabled = true;
+                    btnStopMusic.IsEnabled = true;
+                    btnNextMusic.IsEnabled = true;
+                    btnPauseMusic.IsEnabled = true;
+                }
+
+
+            }
+            else if (moviesTabItem.IsSelected)
+            {
+                activeController = movieController;
+                //hier moet nog code komen
+                movieListBox.Items.Refresh();
+                
+                movieListBox.ItemsSource = activeController.List;
+
+                //Hier geen buttons disablen ? Hoe kijken of er movie in buffer/playlist staat
+
+            }
+            //hier moet nog code komen
+
+           
         }
     }
 }
